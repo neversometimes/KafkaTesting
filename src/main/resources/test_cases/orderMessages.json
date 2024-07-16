@@ -1,0 +1,31 @@
+{
+  "scenarioName": "Produce an order details JSON message for the orders topic",
+        "steps": [
+          {
+            "name": "produce order messages",
+            "url": "kafka-topic: orders",
+            "operation": "produce",
+            "request": {
+              "recordType" : "JSON",
+              "records": [
+                {
+                  "value": {
+                    "order_id" : "PR125",
+                    "item_sku" : "ABCD0006",
+                    "quantity" : "2"
+                  }
+                }
+              ]
+            },
+            "verify": {
+              "status": "Ok",
+              "recordMetadata": {
+                "topicPartition": {
+                  "partition": 0,
+                  "topic": "orders"
+                }
+              }
+            }
+          }
+        ]
+}
