@@ -3,7 +3,7 @@
         "steps": [
           {
             "name": "produce order messages",
-            "url": "kafka-topic: orders",
+            "url": "kafka-topic:orders",
             "operation": "produce",
             "request": {
               "recordType" : "JSON",
@@ -12,7 +12,7 @@
                   "value": {
                     "order_id" : "PR125",
                     "item_sku" : "ABCD0006",
-                    "quantity" : "2"
+                    "quantity" : "1"
                   }
                 }
               ]
@@ -26,6 +26,32 @@
                 }
               }
             }
+          },
+          {
+            "name": "consume order messages",
+            "url": "kafka-topic:orders",
+            "operation": "consume",
+            "request": {
+              "consumerLocalConfigs": {
+                "recordType": "JSON",
+                "commitSync": true,
+                "showRecordsConsumed": true,
+                "maxNoOfRetryPollsOrTimeouts": 3
+              }
+            },
+            "assertions": {
+              "size": 1,
+              "records": [
+                {
+                  "value": {
+                    "order_id" : "PR125",
+                    "item_sku" : "ABCD0006",
+                    "quantity" : "1"
+                  }
+                }
+              ]
+            }
+
           }
         ]
 }
