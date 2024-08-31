@@ -1,0 +1,1 @@
+This repository includes a basic test scenario that leverages Kafka (via a running Docker container) using jsmart.zerocode with JSON property files in order to verify producer/consumer backend messages.
